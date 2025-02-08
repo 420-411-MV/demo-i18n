@@ -1,27 +1,29 @@
-import '../i18n';
-import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import '../i18n';
 import './header.css';
 
 const Header = () => {
     const { t, i18n } = useTranslation();
-    const [ lang, setLang ] = useState('en');
+    const [ nextLang, setNextLang ] = useState('en');
 
     const handleChangeLang = () => {
-        if (lang == 'fr') {
-            setLang('en');
+        console.log('Change to ' + nextLang);
+        i18n.changeLanguage(nextLang);
+        
+        if (nextLang == 'fr') {
+            setNextLang('en');
         } else {
-            setLang('fr');
+            setNextLang('fr');
         }
 
-        console.log('Change to ' + lang);
-        i18n.changeLanguage(lang);   
+ 
     }
 
 
     return (
         <>
-            <button className='intro' onClick={handleChangeLang}>{lang}</button>
+            <button className='intro' onClick={handleChangeLang}>{nextLang}</button>
             <h1>{t('monchoix')}</h1>
         </>
     );
